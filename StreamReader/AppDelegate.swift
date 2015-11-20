@@ -12,36 +12,20 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
+    var masterViewController: MasterViewController!
 
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        // Insert code here to initialize your application
+        // 1. Initialize the MasterViewController
+        masterViewController = MasterViewController(nibName: "MasterViewController", bundle: nil)
         
-        if let sr = StreamReader(path: "/Users/lmelahn/Desktop/randomize_mac_address.sh") {
-            while let line = sr.nextLine() {
-                print(line)
-            }
-        }
-        print("")
-        if let sr = StreamReader(path: "/Users/lmelahn/Desktop/randomize_mac_address.sh") {
-            for line in sr {
-                print(line)
-            }
-        }
+        // 2. Set up the data model here (empty for now).
         
+        // 3. Connect the MasterViewController to the window
+        window.contentView!.addSubview(masterViewController.view)
         
-        let task = NSTask()
-        task.launchPath = "/Users/lmelahn/Desktop/EmitNumbersAtIntervals.app"
-
-        let pipe = NSPipe()
-        task.standardOutput = pipe
-            
-        task.launch()
-        if let sr = StreamReader(fileHandle: pipe.fileHandleForReading) {
-            for line in sr {
-                print(line)
-            }
-        }
+        // 4. Set the window's frame to take up the entire content view.
+        masterViewController.view.frame = (window.contentView! as NSView).bounds
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {

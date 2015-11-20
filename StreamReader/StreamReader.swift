@@ -18,25 +18,6 @@ class StreamReader  {
     let delimData : NSData!
     var atEof : Bool = false
     
-    init?(path: String, delimiter: String = "\n", encoding : UInt = NSUTF8StringEncoding, chunkSize : Int = 4096) {
-        self.chunkSize = chunkSize
-        self.encoding = encoding
-        
-        if let fileHandle = NSFileHandle(forReadingAtPath: path),
-            delimData = delimiter.dataUsingEncoding(encoding),
-            buffer = NSMutableData(capacity: chunkSize)
-        {
-            self.fileHandle = fileHandle
-            self.delimData = delimData
-            self.buffer = buffer
-        } else {
-            self.fileHandle = nil
-            self.delimData = nil
-            self.buffer = nil
-            return nil
-        }
-    }
-    
     init?(fileHandle: NSFileHandle, delimiter: String = "\n", encoding : UInt = NSUTF8StringEncoding, chunkSize : Int = 4096) {
         self.chunkSize = chunkSize
         self.encoding = encoding
@@ -55,11 +36,19 @@ class StreamReader  {
         }
     }
     
+    convenience init?(path: String, delimiter: String = "\n", encoding : UInt = NSUTF8StringEncoding, chunkSize : Int = 4096) {
+ 
+        if let fileHandle = NSFileHandle(forReadingAtPath: path)
+        {
+            self.init(fileHandle: fileHandle)
+        } else {
+            return nil
+        }
+    }
+    
     deinit {
         self.close()
     }
-    
-
     
     /// Return next line, or nil on EOF.
     func nextLine() -> String? {

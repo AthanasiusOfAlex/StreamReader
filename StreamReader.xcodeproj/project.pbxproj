@@ -13,6 +13,8 @@
 		520946D61BFE68520063F770 /* StreamReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520946D51BFE68520063F770 /* StreamReaderTests.swift */; };
 		520946E11BFE68520063F770 /* StreamReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520946E01BFE68520063F770 /* StreamReaderUITests.swift */; };
 		520946EF1BFE68840063F770 /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520946EE1BFE68840063F770 /* StreamReader.swift */; };
+		520946F21BFEE9590063F770 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520946F01BFEE9590063F770 /* MasterViewController.swift */; };
+		520946F31BFEE9590063F770 /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 520946F11BFEE9590063F770 /* MasterViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		520946E01BFE68520063F770 /* StreamReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamReaderUITests.swift; sourceTree = "<group>"; };
 		520946E21BFE68520063F770 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		520946EE1BFE68840063F770 /* StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReader.swift; sourceTree = "<group>"; };
+		520946F01BFEE9590063F770 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		520946F11BFEE9590063F770 /* MasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MasterViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				520946C51BFE68520063F770 /* AppDelegate.swift */,
+				520946F01BFEE9590063F770 /* MasterViewController.swift */,
+				520946F11BFEE9590063F770 /* MasterViewController.xib */,
 				520946EE1BFE68840063F770 /* StreamReader.swift */,
 				520946C71BFE68520063F770 /* Assets.xcassets */,
 				520946C91BFE68520063F770 /* MainMenu.xib */,
@@ -228,6 +234,7 @@
 			files = (
 				520946C81BFE68520063F770 /* Assets.xcassets in Resources */,
 				520946CB1BFE68520063F770 /* MainMenu.xib in Resources */,
+				520946F31BFEE9590063F770 /* MasterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +261,7 @@
 			files = (
 				520946EF1BFE68840063F770 /* StreamReader.swift in Sources */,
 				520946C61BFE68520063F770 /* AppDelegate.swift in Sources */,
+				520946F21BFEE9590063F770 /* MasterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
