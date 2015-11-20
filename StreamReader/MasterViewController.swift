@@ -17,17 +17,49 @@ class MasterViewController: NSViewController {
         // Do view setup here.
         
         let task = NSTask()
-        task.launchPath = "/Applications/EmitNumbersAtIntervals.app"
+        task.launchPath = "/bin/sh"
+        task.arguments = ["-c", "sleep1; echo 10 ; sleep 1 ; echo 20 ; sleep 1 ; echo 30 ; sleep 1 ; echo 40; sleep 1; echo 50; sleep 1; echo 60; sleep 1"]
         
         let pipe = NSPipe()
         task.standardOutput = pipe
-
+        let outHandle = pipe.fileHandleForReading
+        outHandle.waitForDataInBackgroundAndNotify()
+        
+        var progressObserver : NSObjectProtocol!
+        progressObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSFileHandleDataAvailableNotification,
+            object: outHandle, queue: nil) {
+                notification -> Void in
+                let data = outHandle.availableData
+                if data.length > 0 {
+                    if let str = NSString(data: data, encoding: NSUTF8StringEncoding) as String? {
+                        if let newValue = Double(str.trimEverything) {
+                            self.progressIndicator.doubleValue = newValue
+                        }
+                    }
+                    outHandle.waitForDataInBackgroundAndNotify()
+                } else {
+                    // That means we've reached the end of the input.
+                    NSNotificationCenter.defaultCenter().removeObserver(progressObserver)
+                }
+        }
+        
+        var terminationObserver : NSObjectProtocol!
+        terminationObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification,
+            object: task, queue: nil) {
+                notification -> Void in
+                // Process was terminated. Hence, progress should be 100%
+                self.progressIndicator.doubleValue = 100
+                NSNotificationCenter.defaultCenter().removeObserver(terminationObserver)
+        }
+        
         task.launch()
 
-        for line in StreamReader(fileHandle: pipe.fileHandleForReading)! {
-            if let newValue = Double(line) {
-                progressIndicator.doubleValue = newValue
-            }
-        }
+    }
+}
+
+
+extension String {
+    var trimEverything: String {
+        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
     }
 }
