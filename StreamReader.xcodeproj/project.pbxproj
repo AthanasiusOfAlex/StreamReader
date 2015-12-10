@@ -15,6 +15,7 @@
 		520946EF1BFE68840063F770 /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520946EE1BFE68840063F770 /* StreamReader.swift */; };
 		520946F21BFEE9590063F770 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520946F01BFEE9590063F770 /* MasterViewController.swift */; };
 		520946F31BFEE9590063F770 /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 520946F11BFEE9590063F770 /* MasterViewController.xib */; };
+		52EEFFA31C10B471009C1218 /* PathKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EEFFA21C10B471009C1218 /* PathKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		520946EE1BFE68840063F770 /* StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReader.swift; sourceTree = "<group>"; };
 		520946F01BFEE9590063F770 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		520946F11BFEE9590063F770 /* MasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MasterViewController.xib; sourceTree = "<group>"; };
+		52EEFFA21C10B471009C1218 /* PathKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PathKit.swift; path = ../../PathKit/PathKit/PathKit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		520946C41BFE68520063F770 /* StreamReader */ = {
 			isa = PBXGroup;
 			children = (
+				52EEFFA21C10B471009C1218 /* PathKit.swift */,
 				520946C51BFE68520063F770 /* AppDelegate.swift */,
 				520946F01BFEE9590063F770 /* MasterViewController.swift */,
 				520946F11BFEE9590063F770 /* MasterViewController.xib */,
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				520946EF1BFE68840063F770 /* StreamReader.swift in Sources */,
+				52EEFFA31C10B471009C1218 /* PathKit.swift in Sources */,
 				520946C61BFE68520063F770 /* AppDelegate.swift in Sources */,
 				520946F21BFEE9590063F770 /* MasterViewController.swift in Sources */,
 			);
@@ -483,6 +487,7 @@
 				520946E71BFE68520063F770 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		520946E81BFE68520063F770 /* Build configuration list for PBXNativeTarget "StreamReaderTests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +496,7 @@
 				520946EA1BFE68520063F770 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		520946EB1BFE68520063F770 /* Build configuration list for PBXNativeTarget "StreamReaderUITests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +505,7 @@
 				520946ED1BFE68520063F770 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -16,9 +16,40 @@ class MasterViewController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         
+//        func updateProgressIndicator(newValue: Double) {
+//            self.progressIndicator.doubleValue = newValue
+//        }
+//        
+//        func finalizeProgressIndicator() {
+//            self.progressIndicator.doubleValue = 100
+//        }
+        
+        let saveToFolder = "/Users/lmelahn/Desktop/iBreviary"
+        
+        runBreviaryExtractor(
+            "/Users/lmelahn/Projects/BreviaryExtractor/BreviaryExtractor/bin/Debug",
+            application: "BreviaryExtractor.app",
+            arguments: ["--language=en", "--numberOfDays=3", "--saveToFolder=\(saveToFolder)"],
+            taskToPerform: { (newValue: Double) in self.progressIndicator.doubleValue = newValue },
+            endgameTask: { () in self.progressIndicator.doubleValue = 100 }
+        )
+
+    }
+    
+    func runBreviaryExtractor(
+        workingPath: String,
+        application: String,
+        arguments: [String],
+        taskToPerform: (Double)->(),
+        endgameTask: ()->())
+    {
+        let launchPath = (Path(workingPath) + Path(application)).path
+        
         let task = NSTask()
-        task.launchPath = "/bin/sh"
-        task.arguments = ["-c", "sleep1; echo 10 ; sleep 1 ; echo 20 ; sleep 1 ; echo 30 ; sleep 1 ; echo 40; sleep 1; echo 50; sleep 1; echo 60; sleep 1"]
+
+        task.currentDirectoryPath = workingPath
+        task.launchPath = launchPath
+        task.arguments = arguments
         
         let pipe = NSPipe()
         task.standardOutput = pipe
@@ -31,10 +62,8 @@ class MasterViewController: NSViewController {
                 notification -> Void in
                 let data = outHandle.availableData
                 if data.length > 0 {
-                    if let str = NSString(data: data, encoding: NSUTF8StringEncoding) as String? {
-                        if let newValue = Double(str.trimEverything) {
-                            self.progressIndicator.doubleValue = newValue
-                        }
+                    if let str = NSString(data: data, encoding: NSUTF8StringEncoding) as String?,
+                        newValue = Double(str.trimEverything) {                                                  taskToPerform(newValue)
                     }
                     outHandle.waitForDataInBackgroundAndNotify()
                 } else {
@@ -47,8 +76,8 @@ class MasterViewController: NSViewController {
         terminationObserver = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification,
             object: task, queue: nil) {
                 notification -> Void in
-                // Process was terminated. Hence, progress should be 100%
-                self.progressIndicator.doubleValue = 100
+                // Process was terminated. Hence, run the endgame task
+                endgameTask()
                 NSNotificationCenter.defaultCenter().removeObserver(terminationObserver)
         }
         
@@ -56,7 +85,6 @@ class MasterViewController: NSViewController {
 
     }
 }
-
 
 extension String {
     var trimEverything: String {
